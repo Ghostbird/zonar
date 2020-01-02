@@ -91,7 +91,6 @@ sync func start_game():
     my_player.set_name(str(self_peer_id))
     my_player.set_network_master(self_peer_id)
     my_player.level = level
-    my_player.spawn_point = Vector2(0,0)
     level.get_node("Players").add_child(my_player)
 
     for p in player_info:
@@ -99,8 +98,11 @@ sync func start_game():
         player.set_name(str(p))
         player.set_network_master(p)
         player.level = level
-        player.spawn_point = Vector2(0,0)
         level.get_node("Players").add_child(player)
+
+    if is_network_master():
+        level.spawn_players()
+
     hide()
 
 func _end_game(with_error=""):
