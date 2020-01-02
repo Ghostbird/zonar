@@ -718,8 +718,6 @@ range_layer_min = -1
 range_item_cull_mask = 2
 shadow_item_cull_mask = 2
 
-[node name="Spawn1" type="Position2D" parent="."]
-
-[node name="Spawn2" type="Position2D" parent="."]
-
 [node name="Players" type="Node2D" parent="."]
+
+[node name="Spawns" type="Node2D" parent="."]

@@ -2,7 +2,7 @@ extends "res://actors/BasePlayer.gd"
 
 export(float) var MAX_MINE_RADIUS = 150
 export(float) var MIN_PLACE_RADIUS = 48
-export(float) var PROJECTILE_SPAWN_DISTANCE = 48
+export(float) var PROJECTILE_SPAWN_DISTANCE = 52
 
 enum Action { SHOOT, MINE, PLACE }
 var current_action = Action.MINE
