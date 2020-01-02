@@ -1,0 +1,116 @@
+extends Control
+
+export(int) var server_port = 27027
+export(int) var number_of_players = 2
+# Player info, associate ID to data
+var player_info = {}
+# Info we send to other players
+
+var my_info = { name = "Bukmaster", color = Color8(0, 0, 255) }
+
+var connected_peer_resource = load("res://actors/connected_peer.tscn")
+
+var localplayer = load("res://actors/LocalPlayer.tscn")
+var networkplayer = load("res://actors/NetworkPlayer.tscn")
+
+func _ready():
+    get_tree().connect("network_peer_connected", self, "_player_connected")
+    get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
+    get_tree().connect("connected_to_server", self, "_connected_ok")
+    get_tree().connect("connection_failed", self, "_connected_fail")
+    get_tree().connect("server_disconnected", self, "_server_disconnected")
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+    pass
+
+func _player_connected(id):
+    # Called on both clients and server when a peer connects. Send my info to it.
+    rpc_id(id, "register_player", my_info)
+
+func _player_disconnected(id):
+    if (get_tree().is_network_server()):
+        player_info.erase(id) # Erase player from info.
+        $playerbox.hide()
+    else:
+        get_tree().reload_current_scene()
+
+func _connected_ok():
+    $playerbox.show()
+
+func _server_disconnected():
+    _end_game("Server disconnected")
+
+func _connected_fail():
+    print_debug('CONNECT FAILED')
+
+remote func register_player(info):
+    # Get the id of the RPC sender.
+    var id = get_tree().get_rpc_sender_id()
+    # Store the info
+    player_info[id] = info
+    var connected_peer = connected_peer_resource.instance()
+    connected_peer.set_id(str(id))
+    connected_peer.set_username(info.name)
+    $playerbox/vbox.add_child(connected_peer)
+    if get_tree().is_network_server():
+        $playerbox/start.show()
+
+func _on_host_pressed():
+    var peer = NetworkedMultiplayerENet.new()
+    peer.create_server(server_port, number_of_players)
+    get_tree().set_network_peer(peer)
+    $playerbox.show()
+    $connectbox/host.disabled = true
+    $connectbox/join.disabled = true
+    $connectbox/server_address.editable = false
+
+
+func _on_join_pressed():
+    var peer = NetworkedMultiplayerENet.new()
+    peer.create_client($connectbox/server_address.text, server_port)
+    get_tree().set_network_peer(peer)
+    $connectbox/host.disabled = true
+    $connectbox/join.disabled = true
+    $connectbox/server_address.editable = false
+
+
+func _on_start_pressed():
+    # Do not allow new connections
+    get_tree().set_refuse_new_network_connections(true)
+    rpc("start_game")
+
+sync func start_game():
+    var self_peer_id = get_tree().get_network_unique_id()
+    #This starts the game upon connection.
+    var level = load("res://levels/level01.tscn").instance() #Change to scene for testing
+    level.connect("game_finished",self,"_end_game",[],CONNECT_DEFERRED) # connect deferred so we can safely erase it from the callback
+    get_tree().get_root().add_child(level)
+
+    var my_player = localplayer.instance()
+    my_player.set_name(str(self_peer_id))
+    my_player.set_network_master(self_peer_id)
+    my_player.level = level
+    my_player.spawn_point = Vector2(0,0)
+    level.get_node("Players").add_child(my_player)
+
+    for p in player_info:
+        var player = networkplayer.instance()
+        player.set_name(str(p))
+        player.set_network_master(p)
+        player.level = level
+        player.spawn_point = Vector2(0,0)
+        level.get_node("Players").add_child(player)
+    hide()
+
+func _end_game(with_error=""):
+    if get_tree().get_root().find_node("level"):
+        #erase level scene
+        get_tree().get_root().find_node("level").free() # erase immediately, otherwise network might show errors (this is why we connected deferred above)
+        show()
+    
+    get_tree().set_network_peer(null) #remove peer
+    
+    $connectbox/host.disabled = false
+    $connectbox/join.disabled = false
+    $connectbox/server_address.editable = true

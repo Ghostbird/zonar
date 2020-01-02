@@ -1,0 +1,115 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://actors/BasePlayer.gd" type="Script" id=1]
+[ext_resource path="res://assets/character/adventurer-idle-00.png" type="Texture" id=2]
+[ext_resource path="res://assets/character/adventurer-idle-01.png" type="Texture" id=3]
+[ext_resource path="res://assets/character/adventurer-idle-02.png" type="Texture" id=4]
+[ext_resource path="res://assets/character/adventurer-idle-03.png" type="Texture" id=5]
+[ext_resource path="res://assets/character/adventurer-jump-00.png" type="Texture" id=6]
+[ext_resource path="res://assets/character/adventurer-jump-01.png" type="Texture" id=7]
+[ext_resource path="res://assets/character/adventurer-jump-02.png" type="Texture" id=8]
+[ext_resource path="res://assets/character/adventurer-jump-03.png" type="Texture" id=9]
+[ext_resource path="res://assets/character/adventurer-run-00.png" type="Texture" id=10]
+[ext_resource path="res://assets/character/adventurer-run-01.png" type="Texture" id=11]
+[ext_resource path="res://assets/character/adventurer-run-02.png" type="Texture" id=12]
+[ext_resource path="res://assets/character/adventurer-run-03.png" type="Texture" id=13]
+[ext_resource path="res://assets/character/adventurer-run-04.png" type="Texture" id=14]
+[ext_resource path="res://assets/character/adventurer-run-05.png" type="Texture" id=15]
+[ext_resource path="res://assets/character/adventurer-fall-00.png" type="Texture" id=16]
+[ext_resource path="res://assets/character/adventurer-fall-01.png" type="Texture" id=17]
+[ext_resource path="res://assets/sky.png" type="Texture" id=18]
+[ext_resource path="res://assets/light.png" type="Texture" id=19]
+[ext_resource path="res://assets/Lekker bezig.wav" type="AudioStream" id=20]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "idle",
+"speed": 7.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": false,
+"name": "jump",
+"speed": 18.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ],
+"loop": true,
+"name": "run",
+"speed": 11.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 17 ) ],
+"loop": true,
+"name": "fall",
+"speed": 9.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 12.0
+height = 32.0
+
+[node name="LocalPlayer" type="KinematicBody2D"]
+collision_mask = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 1 )
+animation = "idle"
+frame = 2
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 8 )
+shape = SubResource( 2 )
+
+[node name="camera" type="Camera2D" parent="."]
+zoom = Vector2( 0.75, 0.75 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+editor/display_folded = true
+scale = Vector2( 1.5, 1.5 )
+transform = Transform2D( 1.5, 0, 0, 1.5, 0, 0 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.666, 0.666 )
+motion_mirroring = Vector2( 640, 640 )
+
+[node name="Sky" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+modulate = Color( 0.568627, 0.568627, 0.568627, 1 )
+texture = ExtResource( 18 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 640, 640 )
+
+[node name="BreakTimer" type="Timer" parent="."]
+wait_time = 0.3
+
+[node name="VisionLight" type="Light2D" parent="."]
+visible = false
+texture = ExtResource( 19 )
+texture_scale = 15.0
+energy = 0.8
+range_layer_min = -1
+range_item_cull_mask = 5
+shadow_enabled = true
+shadow_gradient_length = 2.0
+shadow_filter = 3
+shadow_filter_smooth = 8.0
+
+[node name="PointLight" type="Light2D" parent="."]
+visible = false
+texture = ExtResource( 19 )
+texture_scale = 0.6
+energy = 0.8
+range_layer_min = -1
+range_item_cull_mask = 2
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 20 )
+autoplay = true
+[connection signal="timeout" from="BreakTimer" to="." method="_on_BreakTimer_timeout"]
