@@ -15,8 +15,6 @@ var spawn_point
 
 var motion = Vector2()
 
-var controller_id = null
-
 var animation_override = null
 
 onready var projectile = load("res://objects/Projectile.tscn")
@@ -58,7 +56,6 @@ func animate():
 
     var is_on_floor = is_on_floor()
     # Animations
-    var playing = $AnimatedSprite.animation
     var round_motion = motion.round()
     if is_on_floor:
         if round_motion.x == 0:
