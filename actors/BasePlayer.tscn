@@ -90,7 +90,7 @@ modulate = Color( 1.2, 1.2, 1.2, 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "idle"
-frame = 3
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -99,6 +99,7 @@ shape = SubResource( 2 )
 
 [node name="VisionLight" type="Light2D" parent="."]
 visible = false
+enabled = false
 texture = ExtResource( 35 )
 texture_scale = 15.0
 energy = 0.8
@@ -111,11 +112,18 @@ shadow_filter_smooth = 8.0
 
 [node name="PointLight" type="Light2D" parent="."]
 visible = false
+enabled = false
 texture = ExtResource( 35 )
-texture_scale = 0.6
+texture_scale = 0.8
 energy = 0.8
+mode = 2
 range_layer_min = -1
 range_item_cull_mask = 2
+shadow_enabled = true
+shadow_gradient_length = 32.0
+shadow_filter = 3
+shadow_filter_smooth = 8.0
+shadow_item_cull_mask = 2
 
 [node name="Health" type="Label" parent="."]
 margin_top = -32.0
