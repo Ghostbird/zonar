@@ -80,7 +80,8 @@ func animate():
 func movement(delta):
     motion.y += GRAVITY * delta
     motion = move_and_slide(motion, UP)
-    rpc('update_posmot', position, motion)
+    if is_network_master():
+        rpc('update_posmot', position, motion)
     
 puppet func update_posmot(pos, mot):
     position = pos
