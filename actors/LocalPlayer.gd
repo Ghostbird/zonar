@@ -196,8 +196,9 @@ func _on_combowindow_timeout():
     combo = 0
     
 func _on_lose_health(amount):
-    rpc("set_health", health - amount)
-    if health <= 0:
+    var new_health = get_health() - amount
+    rpc("set_health", new_health)
+    if new_health <= 0:
         die()
 
 func die():

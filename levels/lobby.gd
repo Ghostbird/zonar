@@ -22,7 +22,7 @@ func _ready():
 
 func _player_connected(id):
     # Called on both clients and server when a peer connects. Send my info to it.
-    rpc_id(id, "register_player", get_player_info())
+    rpc_id(id, "register_player", get_player_info(), get_tree().get_network_unique_id())
 
 func _player_disconnected(id):
     if (get_tree().is_network_server()):
@@ -46,9 +46,7 @@ func _server_disconnected():
 func _connected_fail():
     print_debug('CONNECT FAILED')
 
-remote func register_player(info):
-    # Get the id of the RPC sender.
-    var id = get_tree().get_rpc_sender_id()
+remote func register_player(info, id):
     # Store the info
     player_info[id] = info
     var connected_peer = connected_peer_resource.instance()
@@ -68,7 +66,7 @@ func _on_host_pressed():
     $playerbox.show()
     $connectbox.disable()
     # Register self
-    register_player(get_player_info())
+    register_player(get_player_info(), get_tree().get_network_unique_id())
 
 func _on_join_pressed():
     var peer = NetworkedMultiplayerENet.new()
@@ -77,7 +75,7 @@ func _on_join_pressed():
     $playerbox.show()
     $connectbox.disable()
     # Register self
-    register_player(get_player_info())
+    register_player(get_player_info(), get_tree().get_network_unique_id())
 
 
 func _on_start_pressed():
@@ -97,6 +95,7 @@ sync func start_game():
     my_player.set_network_master(self_peer_id)
     my_player.level = level
     level.get_node("Players").add_child(my_player)
+    my_player.set_username(player_info[self_peer_id].name)
 
     for p in get_tree().get_network_connected_peers():
         var player = networkplayer.instance()
@@ -104,6 +103,7 @@ sync func start_game():
         player.set_network_master(p)
         player.level = level
         level.get_node("Players").add_child(player)
+        player.set_username(player_info[p].name)
 
     if is_network_master():
         level.spawn_players()

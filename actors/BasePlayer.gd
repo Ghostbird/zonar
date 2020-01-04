@@ -9,16 +9,13 @@ export(float) var FRICTION_GROUND = 0.3
 export(float) var FRICTION_AIR = 0.05
 export(int) var MAX_HEALTH = 100
 
-var health
-
 var spawn_point
-
 var motion = Vector2()
-
 var animation_override = null
 
 onready var projectile = load("res://objects/Projectile.tscn")
-onready var health_box = $Health
+onready var health_box = $health
+onready var username_box = $username
 
 var level = null
 
@@ -26,7 +23,7 @@ func _ready():
     remove_from_physics()
 
 func input(delta):
-    var is_on_floor = is_on_floor()
+    var on_floor = is_on_floor()
     var friction = false
 
     if Input.is_action_pressed("ui_right"):
@@ -36,7 +33,7 @@ func input(delta):
     else:
         friction = true
 
-    if is_on_floor:
+    if on_floor:
         #possibly change with jump buffering
         if Input.is_action_pressed("ui_up"):
             motion.y = -GRAVITY * JUMP_HEIGHT * delta
@@ -54,10 +51,10 @@ func animate():
     if animation_override:
         return
 
-    var is_on_floor = is_on_floor()
+    var on_floor = is_on_floor()
     # Animations
     var round_motion = motion.round()
-    if is_on_floor:
+    if on_floor:
         if round_motion.x == 0:
 
             $AnimatedSprite.play("idle")
@@ -116,8 +113,14 @@ func _on_animation_finished():
     animation_override = null
 
 sync func set_health(h):
-    health = h
-    health_box.text = String(h)
+    health_box.value = h
+
+func get_health():
+    return health_box.value
+
+sync func set_username(username):
+    # For now, we don't support changes during game.
+    username_box.text = username
 
 func remove_from_physics():
     set_physics_process(false)
