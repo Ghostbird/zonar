@@ -145,8 +145,8 @@ func shoot():
     var direction_vector = mouse_position - global_position
     var spawn_position = direction_vector.normalized() * PROJECTILE_SPAWN_DISTANCE
     can_shoot = false
-    $ComboWindow.stop()
-    $ShootDelay.start()
+    combo_window.stop()
+    shoot_delay.start()
     rpc("spawn_projectile", direction_vector, spawn_position + global_position, combo)
 
 func block_select(pos):
@@ -196,8 +196,9 @@ func _on_combowindow_timeout():
     combo = 0
     
 func _on_lose_health(amount):
-    rpc("set_health", health - amount)
-    if health <= 0:
+    var new_health = get_health() - amount
+    rpc("set_health", new_health)
+    if new_health <= 0:
         die()
 
 func die():
