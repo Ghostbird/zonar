@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Lobby.gd" type="Script" id=1]
+[ext_resource path="res://levels/lobby.gd" type="Script" id=1]
 [ext_resource path="res://levels/connectbox.gd" type="Script" id=2]
 
 [node name="lobby" type="Control"]
@@ -109,7 +109,6 @@ size_flags_horizontal = 3
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 
 [node name="playerbox" type="PanelContainer" parent="."]
-visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
