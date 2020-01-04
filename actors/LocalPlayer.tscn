@@ -40,7 +40,7 @@ scale = 3.0
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" parent="." index="0"]
-frame = 2
+frame = 0
 
 [node name="VisionLight" parent="." index="2"]
 visible = true
@@ -78,6 +78,7 @@ wait_time = 0.35
 
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="." index="7"]
 stream = ExtResource( 4 )
+autoplay = true
 
 [node name="Highlighted" type="Sprite" parent="." index="8"]
 editor/display_folded = true
