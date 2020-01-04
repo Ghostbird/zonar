@@ -25,8 +25,7 @@ onready var health_box = $Health
 var level = null
 
 func _ready():
-    health = MAX_HEALTH
-    health_box.text = String(health)
+    remove_from_physics()
 
 func input(delta):
     var is_on_floor = is_on_floor()
@@ -142,3 +141,6 @@ sync func spawn():
     visible = true
     global_position = spawn_point
     add_to_physics()
+
+sync func set_spawn(spawn):
+    spawn_point = spawn
