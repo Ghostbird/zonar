@@ -1,7 +1,7 @@
 extends Control
 
 export(int) var server_port = 27027
-export(int) var number_of_players = 2
+export(int) var max_players = 8
 
 # Player info, associate ID to data
 var player_info = {}
@@ -27,6 +27,12 @@ func _player_connected(id):
 func _player_disconnected(id):
     if (get_tree().is_network_server()):
         player_info.erase(id) # Erase player from info.
+        # Erase node from connected players list
+        for node in $playerbox/vbox/playerinfo/vbox.get_children():
+            if node.id == id:
+                node.queue_free()
+                break
+
         $playerbox.hide()
     else:
         get_tree().reload_current_scene()
@@ -46,16 +52,18 @@ remote func register_player(info):
     # Store the info
     player_info[id] = info
     var connected_peer = connected_peer_resource.instance()
-    connected_peer.set_id(str(id))
+    connected_peer.set_id(id)
     connected_peer.set_color(info.color)
     connected_peer.set_username(info.name)
-    $playerbox/vbox/playerinfo.add_child(connected_peer)
+    $playerbox/vbox/playerinfo/vbox.add_child(connected_peer)
+    $playerbox/vbox/title.text = 'Connected players: (%s/%s)' % [$playerbox/vbox/playerinfo/vbox.get_child_count(), max_players]
     if get_tree().is_network_server():
         $playerbox/vbox/start.show()
 
 func _on_host_pressed():
     var peer = NetworkedMultiplayerENet.new()
-    peer.create_server(server_port, number_of_players)
+    # Godot by default does not treat the server as a player, but it is in our case hence the -1.
+    peer.create_server(server_port, max_players - 1)
     get_tree().set_network_peer(peer)
     $playerbox.show()
     $connectbox.disable()
@@ -64,7 +72,7 @@ func _on_host_pressed():
 
 func _on_join_pressed():
     var peer = NetworkedMultiplayerENet.new()
-    peer.create_client($connectbox/server_address.text, server_port)
+    peer.create_client($connectbox/vbox/server_address.text, server_port)
     get_tree().set_network_peer(peer)
     $playerbox.show()
     $connectbox.disable()

@@ -109,12 +109,13 @@ size_flags_horizontal = 3
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 
 [node name="playerbox" type="PanelContainer" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -160.0
-margin_top = -88.0
+margin_top = -160.0
 margin_right = 160.0
 grow_vertical = 0
 
@@ -122,7 +123,7 @@ grow_vertical = 0
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 313.0
-margin_bottom = 81.0
+margin_bottom = 153.0
 grow_vertical = 0
 size_flags_vertical = 3
 
@@ -131,13 +132,19 @@ margin_right = 306.0
 margin_bottom = 14.0
 text = "Connected players:"
 
-[node name="playerinfo" type="VBoxContainer" parent="playerbox/vbox"]
+[node name="playerinfo" type="ScrollContainer" parent="playerbox/vbox"]
 margin_top = 18.0
 margin_right = 306.0
-margin_bottom = 18.0
+margin_bottom = 146.0
 grow_vertical = 0
 size_flags_horizontal = 3
-custom_constants/separation = 46
+size_flags_vertical = 3
+
+[node name="vbox" type="VBoxContainer" parent="playerbox/vbox/playerinfo"]
+margin_right = 306.0
+margin_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="start" type="Button" parent="playerbox/vbox"]
 visible = false
