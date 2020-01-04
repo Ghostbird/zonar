@@ -19,10 +19,17 @@ texture = ExtResource( 2 )
 region_rect = Rect2( 64, 16, 16, 16 )
 
 [node name="Lifetime" type="Timer" parent="."]
+wait_time = 1.2
 one_shot = true
 autostart = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -2.99925, 6.91301, 10.5891, 7.23654, 13.8244, 0.118835, 8.6479, -7.3224, -4.61691, -6.67534, -0.0874634, 0.442368 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
 polygon = PoolVector2Array( -11.1483, 15.0851, 2.64559, 16.512, 14.7747, 0.339882, 1.69429, -16.3079, -15.9048, -15.1188, -1.63527, 0.577705 )
 [connection signal="body_entered" from="." to="." method="_on_projectile_body_entered"]
 [connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

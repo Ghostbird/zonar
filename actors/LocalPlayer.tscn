@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://actors/BasePlayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/LocalPlayer.gd" type="Script" id=2]
 [ext_resource path="res://assets/sky.png" type="Texture" id=3]
 [ext_resource path="res://assets/Lekker bezig.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/tileset/tileset2/tile_highlight.png" type="Texture" id=5]
+[ext_resource path="res://actors/FPS.gd" type="Script" id=6]
 
 [sub_resource type="Image" id=104]
 data = {
@@ -39,40 +40,44 @@ scale = 3.0
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" parent="." index="0"]
-frame = 3
+frame = 2
 
 [node name="VisionLight" parent="." index="2"]
 visible = true
+enabled = true
 
 [node name="PointLight" parent="." index="3"]
 visible = true
+enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="." index="4"]
 current = true
 zoom = Vector2( 0.75, 0.75 )
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="5"]
-editor/display_folded = true
-scale = Vector2( 1.5, 1.5 )
-transform = Transform2D( 1.5, 0, 0, 1.5, 0, 0 )
+offset = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 1, 1 )
+scroll_base_scale = Vector2( 0.333, 0.333 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
-motion_scale = Vector2( 0.666, 0.666 )
 motion_mirroring = Vector2( 640, 640 )
 
 [node name="Sky" type="Sprite" parent="ParallaxBackground/ParallaxLayer" index="0"]
-modulate = Color( 0.568627, 0.568627, 0.568627, 1 )
+modulate = Color( 0.466667, 0.466667, 0.466667, 1 )
 texture = ExtResource( 3 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 640, 640 )
+region_rect = Rect2( 0, 0, 1920, 1920 )
 
 [node name="BreakTimer" type="Timer" parent="." index="6"]
 wait_time = 0.35
 
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="." index="7"]
 stream = ExtResource( 4 )
-autoplay = true
 
 [node name="Highlighted" type="Sprite" parent="." index="8"]
 editor/display_folded = true
@@ -101,7 +106,22 @@ one_shot = true
 
 [node name="SpawnTimer" type="Timer" parent="." index="12"]
 one_shot = true
+
+[node name="BuildTimer" type="Timer" parent="." index="13"]
+wait_time = 0.15
+
+[node name="DebugUI" type="CanvasLayer" parent="." index="14"]
+layer = 2
+
+[node name="FPS" type="Label" parent="DebugUI" index="0"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 10.0
+margin_bottom = 10.0
+text = "FPS: "
+script = ExtResource( 6 )
 [connection signal="timeout" from="BreakTimer" to="." method="_on_breaktimer_timeout"]
 [connection signal="timeout" from="ShootDelay" to="." method="_on_shootdelay_timeout"]
 [connection signal="timeout" from="ComboWindow" to="." method="_on_combowindow_timeout"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawntimer_timeout"]
+[connection signal="timeout" from="BuildTimer" to="." method="_on_buildtimer_timeout"]

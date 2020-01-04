@@ -40,12 +40,18 @@ func input(delta):
         friction = true
 
     if is_on_floor:
-        if Input.is_action_just_pressed("ui_up"):
+        #possibly change with jump buffering
+        if Input.is_action_pressed("ui_up"):
             motion.y = -GRAVITY * JUMP_HEIGHT * delta
         if friction:
             motion.x = lerp(motion.x, 0, FRICTION_GROUND)
     elif friction:
         motion.x = lerp(motion.x, 4, FRICTION_AIR)
+
+    if Input.is_action_just_released("ui_up"):
+        var stopping_power = -GRAVITY * delta
+        if motion.y < stopping_power:
+            motion.y = stopping_power
 
 func animate():
     if animation_override:
@@ -57,6 +63,7 @@ func animate():
     var round_motion = motion.round()
     if is_on_floor:
         if round_motion.x == 0:
+
             $AnimatedSprite.play("idle")
         else:
             $AnimatedSprite.play("run")
@@ -131,7 +138,7 @@ sync func _on_death():
     remove_from_physics()
 
 sync func spawn():
-    health = MAX_HEALTH
+    set_health(MAX_HEALTH)
     visible = true
     global_position = spawn_point
     add_to_physics()
