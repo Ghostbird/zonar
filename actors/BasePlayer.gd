@@ -122,6 +122,9 @@ sync func set_username(username):
     # For now, we don't support changes during game.
     username_box.text = username
 
+sync func set_color(color):
+    $AnimatedSprite.material.set_shader_param("u_replacement_color", color)
+
 func remove_from_physics():
     set_physics_process(false)
     $CollisionShape2D.disabled = true

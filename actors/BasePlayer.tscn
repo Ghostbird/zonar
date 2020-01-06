@@ -1,42 +1,42 @@
 [gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://actors/BasePlayer.gd" type="Script" id=1]
-[ext_resource path="res://assets/character/adventurer-idle-00.png" type="Texture" id=2]
-[ext_resource path="res://assets/character/adventurer-idle-01.png" type="Texture" id=3]
-[ext_resource path="res://assets/character/adventurer-idle-02.png" type="Texture" id=4]
-[ext_resource path="res://assets/character/adventurer-idle-03.png" type="Texture" id=5]
-[ext_resource path="res://assets/character/adventurer-attack1-00.png" type="Texture" id=6]
-[ext_resource path="res://assets/character/adventurer-attack1-01.png" type="Texture" id=7]
-[ext_resource path="res://assets/character/adventurer-attack1-02.png" type="Texture" id=8]
-[ext_resource path="res://assets/character/adventurer-attack1-03.png" type="Texture" id=9]
-[ext_resource path="res://assets/character/adventurer-attack1-04.png" type="Texture" id=10]
-[ext_resource path="res://assets/character/adventurer-jump-00.png" type="Texture" id=11]
-[ext_resource path="res://assets/character/adventurer-jump-01.png" type="Texture" id=12]
-[ext_resource path="res://assets/character/adventurer-jump-02.png" type="Texture" id=13]
-[ext_resource path="res://assets/character/adventurer-jump-03.png" type="Texture" id=14]
-[ext_resource path="res://assets/character/adventurer-attack2-00.png" type="Texture" id=15]
-[ext_resource path="res://assets/character/adventurer-attack2-01.png" type="Texture" id=16]
-[ext_resource path="res://assets/character/adventurer-attack2-02.png" type="Texture" id=17]
-[ext_resource path="res://assets/character/adventurer-attack2-03.png" type="Texture" id=18]
-[ext_resource path="res://assets/character/adventurer-attack2-04.png" type="Texture" id=19]
-[ext_resource path="res://assets/character/adventurer-attack2-05.png" type="Texture" id=20]
-[ext_resource path="res://assets/character/adventurer-attack3-00.png" type="Texture" id=21]
-[ext_resource path="res://assets/character/adventurer-attack3-01.png" type="Texture" id=22]
-[ext_resource path="res://assets/character/adventurer-attack3-02.png" type="Texture" id=23]
-[ext_resource path="res://assets/character/adventurer-attack3-03.png" type="Texture" id=24]
-[ext_resource path="res://assets/character/adventurer-attack3-04.png" type="Texture" id=25]
-[ext_resource path="res://assets/character/adventurer-attack3-05.png" type="Texture" id=26]
-[ext_resource path="res://assets/character/adventurer-run-00.png" type="Texture" id=27]
-[ext_resource path="res://assets/character/adventurer-run-01.png" type="Texture" id=28]
-[ext_resource path="res://assets/character/adventurer-run-02.png" type="Texture" id=29]
-[ext_resource path="res://assets/character/adventurer-run-03.png" type="Texture" id=30]
-[ext_resource path="res://assets/character/adventurer-run-04.png" type="Texture" id=31]
-[ext_resource path="res://assets/character/adventurer-run-05.png" type="Texture" id=32]
-[ext_resource path="res://assets/character/adventurer-fall-00.png" type="Texture" id=33]
-[ext_resource path="res://assets/character/adventurer-fall-01.png" type="Texture" id=34]
-[ext_resource path="res://assets/light.png" type="Texture" id=35]
-
-[sub_resource type="StyleBoxFlat" id=1]
+[ext_resource path="res://assets/dejavu.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/character/masked/adventurer-idle-00-masked.png" type="Texture" id=3]
+[ext_resource path="res://assets/character/masked/adventurer-idle-01-masked.png" type="Texture" id=4]
+[ext_resource path="res://assets/character/masked/adventurer-idle-02-masked.png" type="Texture" id=5]
+[ext_resource path="res://assets/character/masked/adventurer-idle-03-masked.png" type="Texture" id=6]
+[ext_resource path="res://assets/character/masked/adventurer-fall-00-masked.png" type="Texture" id=7]
+[ext_resource path="res://assets/character/masked/adventurer-fall-01-masked.png" type="Texture" id=8]
+[ext_resource path="res://assets/character/masked/adventurer-jump-00-masked.png" type="Texture" id=9]
+[ext_resource path="res://assets/character/masked/adventurer-jump-01-masked.png" type="Texture" id=10]
+[ext_resource path="res://assets/character/masked/adventurer-jump-02-masked.png" type="Texture" id=11]
+[ext_resource path="res://assets/character/masked/adventurer-jump-03-masked.png" type="Texture" id=12]
+[ext_resource path="res://assets/character/masked/adventurer-attack3-00-masked.png" type="Texture" id=13]
+[ext_resource path="res://assets/character/masked/adventurer-attack3-01-masked.png" type="Texture" id=14]
+[ext_resource path="res://assets/character/masked/adventurer-attack3-02-masked.png" type="Texture" id=15]
+[ext_resource path="res://assets/character/masked/adventurer-attack3-03-masked.png" type="Texture" id=16]
+[ext_resource path="res://assets/character/masked/adventurer-attack3-04-masked.png" type="Texture" id=17]
+[ext_resource path="res://assets/character/masked/adventurer-attack3-05-masked.png" type="Texture" id=18]
+[ext_resource path="res://assets/character/masked/adventurer-run-00-masked.png" type="Texture" id=19]
+[ext_resource path="res://assets/character/masked/adventurer-run-01-masked.png" type="Texture" id=20]
+[ext_resource path="res://assets/character/masked/adventurer-run-02-masked.png" type="Texture" id=21]
+[ext_resource path="res://assets/character/masked/adventurer-run-03-masked.png" type="Texture" id=22]
+[ext_resource path="res://assets/character/masked/adventurer-run-04-masked.png" type="Texture" id=23]
+[ext_resource path="res://assets/character/masked/adventurer-run-05-masked.png" type="Texture" id=24]
+[ext_resource path="res://assets/character/masked/adventurer-attack2-00-masked.png" type="Texture" id=25]
+[ext_resource path="res://assets/character/masked/adventurer-attack2-01-masked.png" type="Texture" id=26]
+[ext_resource path="res://assets/character/masked/adventurer-attack2-02-masked.png" type="Texture" id=27]
+[ext_resource path="res://assets/character/masked/adventurer-attack2-03-masked.png" type="Texture" id=28]
+[ext_resource path="res://assets/character/masked/adventurer-attack2-04-masked.png" type="Texture" id=29]
+[ext_resource path="res://assets/character/masked/adventurer-attack2-05-masked.png" type="Texture" id=30]
+[ext_resource path="res://assets/character/masked/adventurer-attack1-00-masked.png" type="Texture" id=31]
+[ext_resource path="res://assets/character/masked/adventurer-attack1-01-masked.png" type="Texture" id=32]
+[ext_resource path="res://assets/character/masked/adventurer-attack1-02-masked.png" type="Texture" id=33]
+[ext_resource path="res://assets/character/masked/adventurer-attack1-03-masked.png" type="Texture" id=34]
+[ext_resource path="res://assets/character/masked/adventurer-attack1-04-masked.png" type="Texture" id=35]
+[ext_resource path="res://actors/AnimatedSprite.gd" type="Script" id=36]
+[ext_resource path="res://assets/light.png" type="Texture" id=37]
 
 [sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 1, 0, 0, 1 )
@@ -47,45 +47,73 @@ corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxEmpty" id=8]
 
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
 
-[sub_resource type="StyleBoxEmpty" id=2]
+// Which color you want to change
+uniform vec4 u_color_key : hint_color;
+// Which color to replace it with
+uniform vec4 u_replacement_color : hint_color;
+// How much tolerance for the replacement color (between 0 and 1)
+uniform float u_tolerance;
+
+void fragment() {
+    // Get color from the sprite texture at the current pixel we are rendering
+    vec4 original_color = texture(TEXTURE, UV);
+    vec3 col = original_color.rgb;
+    // Get a rough degree of difference between the texture color and the color key
+    vec3 diff3 = col - u_color_key.rgb;
+    float m = max(max(abs(diff3.r), abs(diff3.g)), abs(diff3.b));
+    // Change color of pixels below tolerance threshold, while keeping shades if any (a bit naive, there may better ways)
+    float brightness = length(col);
+    col = mix(col, u_replacement_color.rgb * brightness, step(m, u_tolerance));
+    // Assign final color for the pixel, and preserve transparency
+    COLOR = vec4(col.rgb, original_color.a);
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+render_priority = 1
+shader = SubResource( 5 )
+shader_param/u_color_key = Color( 0, 1, 0, 1 )
+shader_param/u_replacement_color = Color( 1, 0.968627, 0, 1 )
+shader_param/u_tolerance = 0.5
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "idle",
 "speed": 7.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
-"loop": false,
-"name": "attack1",
-"speed": 15.0
+"frames": [ ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "fall",
+"speed": 9.0
 }, {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
 "loop": false,
 "name": "jump",
 "speed": 18.0
 }, {
-"frames": [ ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
-"loop": false,
-"name": "attack2",
-"speed": 15.0
-}, {
-"frames": [ ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ) ],
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
 "loop": false,
 "name": "attack3",
 "speed": 15.0
 }, {
-"frames": [ ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ) ],
+"frames": [ ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ) ],
 "loop": true,
 "name": "run",
 "speed": 11.0
 }, {
-"frames": [ ExtResource( 33 ), ExtResource( 34 ) ],
-"loop": true,
-"name": "fall",
-"speed": 9.0
+"frames": [ ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ) ],
+"loop": false,
+"name": "attack2",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ) ],
+"loop": false,
+"name": "attack1",
+"speed": 15.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=4]
@@ -139,12 +167,12 @@ value = 100.0
 percent_visible = false
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-modulate = Color( 1.2, 1.2, 1.2, 1 )
+material = SubResource( 6 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 3 )
-animation = "idle"
-frame = 1
+animation = "run"
 playing = true
+script = ExtResource( 36 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 8 )

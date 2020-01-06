@@ -96,6 +96,7 @@ sync func start_game():
     my_player.level = level
     level.get_node("Players").add_child(my_player)
     my_player.set_username(player_info[self_peer_id].name)
+    my_player.set_color(player_info[self_peer_id].color)
 
     for p in get_tree().get_network_connected_peers():
         var player = networkplayer.instance()
@@ -104,6 +105,7 @@ sync func start_game():
         player.level = level
         level.get_node("Players").add_child(player)
         player.set_username(player_info[p].name)
+        player.set_color(player_info[p].color)
 
     if is_network_master():
         level.spawn_players()
