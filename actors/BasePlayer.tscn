@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://actors/BasePlayer.gd" type="Script" id=1]
 [ext_resource path="res://assets/character/adventurer-idle-00.png" type="Texture" id=2]
@@ -37,8 +37,16 @@
 [ext_resource path="res://assets/light.png" type="Texture" id=35]
 
 [sub_resource type="StyleBoxFlat" id=1]
+
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 1, 0, 0, 1 )
-anti_aliasing = false
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
@@ -91,23 +99,41 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="username" type="Label" parent="."]
-margin_left = -100.0
-margin_top = -48.6791
-margin_right = 100.0
-margin_bottom = -34.6791
-size_flags_horizontal = 5
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_top = -49.0
+margin_right = 64.0
+margin_bottom = -49.0
+use_top_left = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = -32.0
+margin_top = -12.0
+margin_right = 32.0
+margin_bottom = 11.0
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+margin_right = 64.0
+margin_bottom = 15.0
+
+[node name="username" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer"]
+margin_left = 2.0
+margin_right = 62.0
+margin_bottom = 15.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
 text = "username"
 align = 1
 valign = 1
 
-[node name="health" type="ProgressBar" parent="."]
-margin_left = -30.0
-margin_top = -33.0188
-margin_right = 30.0
-margin_bottom = -27.0188
-custom_styles/fg = SubResource( 1 )
-custom_styles/bg = SubResource( 2 )
+[node name="health" type="ProgressBar" parent="CenterContainer/VBoxContainer"]
+margin_top = 19.0
+margin_right = 64.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 64, 4 )
+size_flags_horizontal = 4
+custom_styles/fg = SubResource( 7 )
+custom_styles/bg = SubResource( 8 )
 step = 1.0
 value = 100.0
 percent_visible = false
@@ -127,7 +153,7 @@ shape = SubResource( 4 )
 [node name="VisionLight" type="Light2D" parent="."]
 visible = false
 enabled = false
-texture = ExtResource( 35 )
+texture = ExtResource( 37 )
 texture_scale = 15.0
 energy = 0.8
 range_layer_min = -1
@@ -140,7 +166,7 @@ shadow_filter_smooth = 8.0
 [node name="PointLight" type="Light2D" parent="."]
 visible = false
 enabled = false
-texture = ExtResource( 35 )
+texture = ExtResource( 37 )
 texture_scale = 0.8
 energy = 0.8
 mode = 2

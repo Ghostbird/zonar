@@ -14,8 +14,8 @@ var motion = Vector2()
 var animation_override = null
 
 onready var projectile = load("res://objects/Projectile.tscn")
-onready var health_box = $health
-onready var username_box = $username
+onready var health_box = $CenterContainer/VBoxContainer/health
+onready var username_box = $CenterContainer/VBoxContainer/CenterContainer/username
 
 var level = null
 

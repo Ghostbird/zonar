@@ -20,6 +20,10 @@ run/main_scene="res://levels/lobby.tscn"
 run/low_processor_mode=true
 config/icon="res://icon.png"
 
+[gui]
+
+theme/custom_font="res://assets/dejavu.tres"
+
 [input]
 
 ui_left={
