@@ -38,16 +38,16 @@
 [ext_resource path="res://actors/AnimatedSprite.gd" type="Script" id=36]
 [ext_resource path="res://assets/light.png" type="Texture" id=37]
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 0, 0, 1 )
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[sub_resource type="StyleBoxEmpty" id=8]
+[sub_resource type="StyleBoxEmpty" id=2]
 
-[sub_resource type="Shader" id=5]
+[sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
 
 // Which color you want to change
@@ -71,14 +71,14 @@ void fragment() {
     COLOR = vec4(col.rgb, original_color.a);
 }"
 
-[sub_resource type="ShaderMaterial" id=6]
+[sub_resource type="ShaderMaterial" id=4]
 render_priority = 1
-shader = SubResource( 5 )
+shader = SubResource( 3 )
 shader_param/u_color_key = Color( 0, 1, 0, 1 )
 shader_param/u_replacement_color = Color( 1, 0.968627, 0, 1 )
 shader_param/u_tolerance = 0.5
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=5]
 animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
@@ -116,7 +116,7 @@ animations = [ {
 "speed": 15.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=6]
 radius = 12.0
 height = 32.0
 
@@ -160,23 +160,24 @@ margin_right = 64.0
 margin_bottom = 23.0
 rect_min_size = Vector2( 64, 4 )
 size_flags_horizontal = 4
-custom_styles/fg = SubResource( 7 )
-custom_styles/bg = SubResource( 8 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
 step = 1.0
 value = 100.0
 percent_visible = false
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-material = SubResource( 6 )
+material = SubResource( 4 )
 scale = Vector2( 2, 2 )
-frames = SubResource( 3 )
-animation = "run"
+frames = SubResource( 5 )
+animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 36 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 8 )
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 
 [node name="VisionLight" type="Light2D" parent="."]
 visible = false

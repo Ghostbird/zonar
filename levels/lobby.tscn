@@ -24,61 +24,61 @@ script = ExtResource( 2 )
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 313.0
-margin_bottom = 216.0
+margin_bottom = 217.0
 custom_constants/separation = 10
 
 [node name="title" type="Label" parent="connectbox/vbox"]
 margin_right = 306.0
-margin_bottom = 14.0
+margin_bottom = 15.0
 text = "Zonar"
 align = 1
 
 [node name="server_address_title" type="Label" parent="connectbox/vbox"]
-margin_top = 24.0
+margin_top = 25.0
 margin_right = 306.0
-margin_bottom = 38.0
+margin_bottom = 40.0
 size_flags_horizontal = 3
 text = "Server address:"
 
 [node name="server_address" type="LineEdit" parent="connectbox/vbox"]
-margin_top = 48.0
+margin_top = 50.0
 margin_right = 306.0
-margin_bottom = 72.0
+margin_bottom = 75.0
 text = "localhost"
 
 [node name="hbox_titles" type="HBoxContainer" parent="connectbox/vbox"]
-margin_top = 82.0
+margin_top = 85.0
 margin_right = 306.0
-margin_bottom = 96.0
+margin_bottom = 100.0
 
 [node name="username_title" type="Label" parent="connectbox/vbox/hbox_titles"]
-margin_right = 265.0
-margin_bottom = 14.0
+margin_right = 268.0
+margin_bottom = 15.0
 size_flags_horizontal = 3
 text = "Username:"
 
 [node name="colour_title" type="Label" parent="connectbox/vbox/hbox_titles"]
-margin_left = 269.0
+margin_left = 272.0
 margin_right = 306.0
-margin_bottom = 14.0
+margin_bottom = 15.0
 text = "Color:"
 align = 2
 
 [node name="hbox" type="HBoxContainer" parent="connectbox/vbox"]
-margin_top = 106.0
+margin_top = 110.0
 margin_right = 306.0
 margin_bottom = 135.0
 
 [node name="username" type="LineEdit" parent="connectbox/vbox/hbox"]
 margin_right = 270.0
-margin_bottom = 29.0
+margin_bottom = 25.0
 size_flags_horizontal = 3
 placeholder_text = "Username"
 
 [node name="color" type="ColorPickerButton" parent="connectbox/vbox/hbox"]
 margin_left = 274.0
 margin_right = 306.0
-margin_bottom = 29.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 32, 0 )
 
 [node name="hbox_buttons" type="HBoxContainer" parent="connectbox/vbox"]
@@ -104,7 +104,7 @@ text = "Join"
 [node name="error" type="Label" parent="connectbox/vbox"]
 margin_top = 195.0
 margin_right = 306.0
-margin_bottom = 209.0
+margin_bottom = 210.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 
